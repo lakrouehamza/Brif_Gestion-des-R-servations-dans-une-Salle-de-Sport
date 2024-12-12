@@ -8,7 +8,7 @@ nom varchar(50) not null,
 prenom varchar(50) not null,
 email varchar(100) not null,
 telephone varchar(10) not null 
-);
+); 
 create table activite (
     id integer primary key auto_increment,
     nom varchar(50) not null,
