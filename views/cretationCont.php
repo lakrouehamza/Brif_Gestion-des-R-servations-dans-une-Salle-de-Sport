@@ -8,6 +8,8 @@ if(mysqli_connect_errno()){
      echo 'Database is connected';  
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,10 +74,16 @@ if(mysqli_connect_errno()){
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="activite" name="activite">
                 <option value="">Select a service</option>
-                <option value="haircut">Haircut</option>
-                <option value="coloring">Coloring</option>
-                <option value="styling">Styling</option>
-                <option value="facial">Facial</option>
+                <?php 
+                $commande = " select  * from activite ;";
+                $resultE = mysqli_query($connect ,$commande);
+                while($row=mysqli_fetch_assoc($resultE)){
+                    echo '<option value="' . $row['nom'] . '">' . $row['nom'] . '</option>';
+
+                }
+                ?>
+                
+
             </select>
         </div>
         <div class="mb-4">
@@ -125,19 +133,29 @@ die("Database query failed. " . mysqli_error($connection));
 }
        
 ?>
+
              <?php
         //2- insert from database
         
           // button click  
 if (isset($_POST['conservation'])) { 
 
- $nom=$_POST['nom'];
+   $nom=$_POST['nom'];
   $prenom=$_POST['prenom'];
   $email =$_POST['email'];
   $phone =$_POST['phone'];
   $dateR =$_POST['dateR'];
-   $query="insert into  reservation(id_client,id_activite,date_resevation,statut)
-           values(1,1,'01/01/2025','active');";
+  $activite = $_POST['activite'];
+  $commandeIdClient = "select * from client where nom = '$nom' and prenom = '$prenom'";
+  $arrayIDcleint = mysqli_query($connect ,$commandeIdClient);
+  $rowIDCleint = mysqli_fetch_assoc($arrayIDcleint); 
+  $commandeIdActivite ="select * from activite where nom = '$activite';";
+  $arrayActivite = mysqli_query($connect , $commandeIdActivite);
+  $rowActivite = mysqli_fetch_assoc($arrayActivite);
+ $query = "insert into  reservation(id_client,id_activite,date_resevation,statut) 
+          values ('" . $rowIDCleint['id'] . "', '" . $rowActivite['id'] . "', '" . $dateR . "', 'active');";
+
+
         $result=  mysqli_query($connect, $query);
     
         if( $result){
