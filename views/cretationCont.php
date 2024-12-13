@@ -5,10 +5,13 @@ if(mysqli_connect_errno()){
     
 }
  else {
-     echo 'Database is connected';  
+     // echo 'Database is connected';  
 }
 ?>
 
+<?php 
+$messag_nom=$messag_prernom=$messag_email=$messag_phone=$messag_date=$messag_acticite="";
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,10 +41,9 @@ if(mysqli_connect_errno()){
     <div class="hidden md:flex md:items-center md:w-auto w-full" id="menu">
         <nav>
             <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
-                <li><a class="md:p-4 py-3 px-0 block" href="creationCont.php">Add reservation</a></li>
-                <li><a class="md:p-4 py-3 px-0 block" href="listeResrvation.php">Les réservations</a></li>
-                <li><a class="md:p-4 py-3 px-0 block" href="login.php">Login</a></li>
-                <li><a class="md:p-4 py-3 px-0 block md:mb-0 mb-2" href="#">Contact Us</a></li>
+                <li><a class="md:p-4 py-3 px-0 block" href="cretationCont.php">Add reservation</a></li>
+                <li><a class="md:p-4 py-3 px-0 block" href="listeResrvate.php">Les réservations</a></li>
+                <li><a class="md:p-4 py-3 px-0 block" href="creatActivite.php">Add Activite</a></li>
             </ul>
         </nav>
     </div>
@@ -68,7 +70,8 @@ if(mysqli_connect_errno()){
             </label>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="nom" type="text" placeholder="Enter your name" name="nom">
+                id="nom" type="text" placeholder="Enter your name" name="nom"/>
+                <?php echo $messag_nom; ?>
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="prenom">
@@ -76,7 +79,8 @@ if(mysqli_connect_errno()){
             </label>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="prenom"  name="prenom" type="text" placeholder="Enter your name">
+                id="prenom"  name="prenom" type="text" placeholder="Enter your name" />
+                 <?php echo $messag_prernom; ?>
         </div>
 
         <div class="mb-4"> 
@@ -85,7 +89,8 @@ if(mysqli_connect_errno()){
             </label>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email" type="email" name="email" placeholder="Enter your email">
+                id="email" type="email" name="email" placeholder="Enter your email"/>
+                <?php echo $messag_email; ?>
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="phone">
@@ -93,7 +98,8 @@ if(mysqli_connect_errno()){
             </label>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="phone" type="tel" name="phone" placeholder="Enter your phone number">
+                id="phone" type="tel" name="phone" placeholder="Enter your phone number"/>
+                <?php echo $messag_phone; ?>
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="activite">
@@ -102,7 +108,7 @@ if(mysqli_connect_errno()){
             <select
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="activite" name="activite">
-                <option value="">Select a service</option>
+                <option value="Select a service">Select a service</option>
                 <?php 
                 $commande = " select  * from activite ;";
                 $resultE = mysqli_query($connect ,$commande);
@@ -114,6 +120,7 @@ if(mysqli_connect_errno()){
                 
 
             </select>
+            <?php echo $messag_acticite; ?>
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="date">
@@ -121,7 +128,8 @@ if(mysqli_connect_errno()){
             </label>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="date" type="date" name="dateR" placeholder="Select a date">
+                id="date" type="date" name="dateR" placeholder="Select a date"/>
+                <?php echo $messag_date; ?>
         </div>
 
         <div class="flex items-center justify-center mb-4">
@@ -154,7 +162,7 @@ if (isset($_POST['conservation'])) {
         $result=  mysqli_query($connect, $query);
     
         if( $result){
-            echo '</br>Data is inerted';
+            // echo '</br>Data is inerted';
         } 
  else {
 die("Database query failed. " . mysqli_error($connection));
@@ -168,13 +176,39 @@ die("Database query failed. " . mysqli_error($connection));
         
           // button click  
 if (isset($_POST['conservation'])) { 
+    $valide = true;
+    $nom=$_POST['nom'];
+    $prenom=$_POST['prenom'];
+    $email =$_POST['email'];
+    $phone =$_POST['phone'];
+    $dateR =$_POST['dateR'];
+    $activite = $_POST['activite'];
+    $valide =true;
+//     if (!preg_match("/^[a-zA-Z\s]{5,30}$/", $nom)) {
+//     $messag_nom = "Error in nom format";
+//     $valide = false;
+// }
 
-   $nom=$_POST['nom'];
-  $prenom=$_POST['prenom'];
-  $email =$_POST['email'];
-  $phone =$_POST['phone'];
-  $dateR =$_POST['dateR'];
-  $activite = $_POST['activite'];
+//     if(!preg_match("/^[a-zA-Z\s]{5,30}$/", $prenom)){
+//         $messag_prernom = "error prenom ";
+//         $valide =false;
+//     }
+//     if(!preg_match("/^[a-zA-Z1-9\._]{5,30}+gmail.com$/", $email)){
+//        $messag_email ="erore en";
+//         $valide =false;
+//     }
+//     if(!preg_match("/^[0-9]{10}$/", $phone)){
+//        $messag_phone ="eror";
+//         $valide =false;
+//     }
+
+
+//     if($activite=="Select a service"){
+//        $messag_acticite="erore ";
+//         $valide =false;
+//     }
+  
+// if($valide){
   $commandeIdClient = "select * from client where nom = '$nom' and prenom = '$prenom'";
   $arrayIDcleint = mysqli_query($connect ,$commandeIdClient);
   $rowIDCleint = mysqli_fetch_assoc($arrayIDcleint); 
@@ -182,18 +216,19 @@ if (isset($_POST['conservation'])) {
   $arrayActivite = mysqli_query($connect , $commandeIdActivite);
   $rowActivite = mysqli_fetch_assoc($arrayActivite);
  $query = "insert into  reservation(id_client,id_activite,date_resevation,statut) 
-          values ('" . $rowIDCleint['id'] . "', '" . $rowActivite['id'] . "', '" . $dateR . "', 'active');";
+          values ('" . $rowIDCleint['id'] . "', '" . $rowActivite['id'] . "', '" . $dateR . "', 'confirmée');";
 
 
         $result=  mysqli_query($connect, $query);
     
         if( $result){
-            echo '</br>Data is inerted';
+            // echo '</br>Data is inerted';
         } 
  else {
 die("Database query failed. " . mysqli_error($connection));
  }
 }
+// }
         ?>
 </body>
 </html>

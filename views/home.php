@@ -40,9 +40,9 @@
     <div class="hidden md:flex md:items-center md:w-auto w-full" id="menu">
         <nav>
             <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
-                <li><a class="md:p-4 py-3 px-0 block" href="creationCont.php">Add reservation</a></li>
-                <li><a class="md:p-4 py-3 px-0 block" href="listeResrvation.php">Les réservations</a></li>
-                <li><a class="md:p-4 py-3 px-0 block" href="login.php">Login</a></li>
+                <li><a class="md:p-4 py-3 px-0 block" href="cretationCont.php">Add reservation</a></li>
+                <li><a class="md:p-4 py-3 px-0 block" href="listeResrvate.php">Les réservations</a></li>
+                <li><a class="md:p-4 py-3 px-0 block" href="creatActivite.php">Add Activite</a></li>
                 <li><a class="md:p-4 py-3 px-0 block md:mb-0 mb-2" href="#">Contact Us</a></li>
             </ul>
         </nav>
@@ -65,8 +65,8 @@
                         </h1>
                         <p class="text-xl mb-8 text-gray-300">Empowering businesses with cutting-edge solutions for a digital future.</p>
                         <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                            <a href="#" class="bg-white text-blue-900 font-semibold px-8 py-3 rounded-full hover:bg-blue-100 transition duration-300 text-center">Get Started</a>
-                            <a href="#" class="border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white hover:text-blue-900 transition duration-300 text-center">Learn More</a>
+                            <a href="creatActivite.php" class="bg-white text-blue-900 font-semibold px-8 py-3 rounded-full hover:bg-blue-100 transition duration-300 text-center">add activite</a>
+                            <a href="cretationCont.php" class="border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white hover:text-blue-900 transition duration-300 text-center">add reservation</a>
                         </div>
                     </div>
                     

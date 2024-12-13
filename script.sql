@@ -76,3 +76,8 @@ select * from client;
 update client 
 set email ='amou12@gmail'
 where nom = 'oussama' and  prenom ='amou';
+ 
+ CREATE PROCEDURE update_activite()
+BEGIN
+   DELETE FROM table_name WHERE date_res = CURDATE();
+END;
