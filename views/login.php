@@ -1,3 +1,13 @@
+<?php
+$connect=  mysqli_connect("localhost","root","12345","bibloiteque");
+if(mysqli_connect_errno()){
+    die("cannot connect to database field:". mysqli_connect_error());
+    
+}
+ else {
+    // echo 'Database is connected';  
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,3 +80,7 @@
 </section>
 </body>
 </html>
+<?php
+//5 close connection
+mysqli_close($connect);
+?>
