@@ -57,7 +57,7 @@ where id in (select id_client
              from reservation 
              group by id_client );
     --metode 2
-select c.nom ,c.prenom
+select c.nom ,c.prenom ,r.date_resevation
 from client c,reservation r
 where c.id = r.id_client
 group by id_client ;
